@@ -52,3 +52,9 @@ li button {
   border-radius: 3px;
   cursor: pointer;
 }
+.edit-input {
+  padding: 5px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  margin-right: 5px;
+}

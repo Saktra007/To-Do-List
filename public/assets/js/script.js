@@ -1,7 +1,7 @@
 const todoInput = document.getElementById("todo-input");
 const addBtn = document.getElementById("add-btn");
 const todoList = document.getElementById("todo-list");
-
+let editingld = null;
 document.addEventListener("DOMContentLoaded", () => {
   const tasks = getTasksFromStorage();
   if (tasks.length > 0) renderTasks(tasks);
@@ -15,23 +15,64 @@ function getTasksFromStorage() {
 
 function renderTasks(tasks) {
   todoList.innerHTML = "";
-  tasks.forEach((task, index) => {
+  tasks.forEach((task) => {
     const li = document.createElement("li");
-    li.textContent = task.text;
+    if (editingld === task.id) {
+      const editInput = document.createElement("input");
+      editInput.type = "text";
+      editInput.value = task.text;
+      editInput.className = "edit-input";
 
-    const btndelete = document.createElement("button");
-    btndelete.textContent = "Delete";
-    btndelete.addEventListener("click", () => {
-      removeTask(index);
-    });
-    li.appendChild(btndelete);
+      const saveBtn = document.createElement("button");
+      saveBtn.textContent = "Save";
+
+      const handleSave = () => {
+        saveEdit(task.id, editInput.value);
+      };
+      saveBtn.addEventListener("click", handleSave);
+      editInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleSave();
+      });
+      li.appendChild(editInput);
+      li.appendChild(saveBtn);
+    } else {
+      const span = document.createElement("span");
+      span.textContent = task.text;
+
+      const editbtn = document.createElement("button");
+      editbtn.textContent = "Edit";
+      editbtn.addEventListener("click", () => {
+        editingld = task.id;
+        renderTasks(tasks);
+      });
+
+      const btndelete = document.createElement("button");
+      btndelete.textContent = "Delete";
+      btndelete.addEventListener("click", () => {
+        removeTask(task.id);
+      });
+      li.appendChild(span);
+      li.appendChild(editbtn);
+      li.appendChild(btndelete);
+    }
     todoList.appendChild(li);
   });
 }
 
-function removeTask(index) {
-  const tasks = getTasksFromStorage();
-  tasks.splice(index, 1);
+function saveEdit(id, newText) {
+  if (newText.trim() === "") return;
+
+  let tasks = getTasksFromStorage();
+  tasks = tasks.map((task) =>
+    task.id === id ? { ...task, text: newText.trim() } : task
+  );
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  editingld = null;
+  renderTasks(tasks);
+}
+function removeTask(id) {
+  let tasks = getTasksFromStorage();
+  tasks = tasks.filter((task) => task.id !== id);
   localStorage.setItem("tasks", JSON.stringify(tasks));
   renderTasks(tasks);
 }
@@ -40,10 +81,10 @@ addBtn.addEventListener("click", () => {
   const textTask = todoInput.value.trim();
   if (textTask === "") return;
   const Tasks = getTasksFromStorage();
-  Tasks.push({ text: textTask });
+  Tasks.push({ id: Date.now(), text: textTask, status: "Active" });
   localStorage.setItem("tasks", JSON.stringify(Tasks));
   renderTasks(Tasks);
-  todoInput.value="";
+  todoInput.value = "";
 });
 
 todoInput.addEventListener("keypress", (e) => {
