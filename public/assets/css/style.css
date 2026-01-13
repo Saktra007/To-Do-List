@@ -58,3 +58,18 @@ li button {
   border-radius: 4px;
   margin-right: 5px;
 }
+.filter-btn {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 4px;
+}
+
+/* ប៊ូតុងដែលត្រូវបានជ្រើសរើស (Active) */
+.filter-btn.active {
+  background-color: #007bff; /* ពណ៌ខៀវ */
+  color: white;
+  border-color: #0056b3;
+}
