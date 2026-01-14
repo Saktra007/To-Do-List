@@ -46,7 +46,6 @@ To-Do-List/
 │   │    ├── css/style.css
 │   │    └── js/script.js
 │── README.md
-│── LICENSE (optional)
 ```
 
 ## How It Works
@@ -79,6 +78,3 @@ To-Do-List/
 * Task categories/tags
 * Online sync with backend
 
-## License
-
-MIT License (or choose your preferred license).
