@@ -3,22 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do List</title>
+    <title>Modern Task Manager</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <script>
+      // Apply theme immediately to prevent "flash" of white in dark mode
+      const savedTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
   </head>
   <body>
     <div class="todo-container">
-      <h1>My To-Do List</h1>
-      <input type="text" id="todo-input" placeholder="Add new task..." />
-      <button id="add-btn">Add</button>
+      <div class="header-row">
+        <h1>Task Manager</h1>
+        <label class="theme-switch" title="Toggle Dark/Light Mode">
+          <input type="checkbox" id="dark-mode-toggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="input-section">
+        <input
+          type="text"
+          id="todo-input"
+          placeholder="What needs to be done?"
+          autocomplete="off"
+        />
+        <button id="add-btn">Add</button>
+      </div>
+
       <div class="filter-container">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="active">Active</button>
-        <button class="filter-btn" data-filter="complete">Complete</button>
+        <button class="filter-btn" data-filter="complete">Completed</button>
       </div>
-      <ul id="todo-list"></ul>
+
+      <ul id="todo-list">
+        </ul>
+
+      <div id="todo-footer" style="margin-top: 20px; font-size: 13px; color: var(--text-sub); display: flex; justify-content: space-between;">
+        <span id="task-count">0 tasks left</span>
+        <button id="clear-completed" style="background: none; border: none; color: var(--text-sub); cursor: pointer; font-size: 13px; padding: 0;">Clear Completed</button>
+      </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

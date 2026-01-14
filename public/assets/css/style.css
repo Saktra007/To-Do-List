@@ -1,75 +1,152 @@
+/* --- 1. General Setup & Variables --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-body: #f4f7f6;
+  --bg-container: #ffffff;
+  --primary: #007bff;
+  --primary-hover: #0056b3;
+  --text-main: #2d3436;
+  --text-sub: #636e72;
+  --border: #edf2f7;
+  --shadow: rgba(0, 0, 0, 0.05);
+  --task-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+  --bg-body: #121212;
+  --bg-container: #1e1e1e;
+  --text-main: #f5f6fa;
+  --text-sub: #a29bfe;
+  --border: #2d2d2d;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --task-bg: #2d2d2d;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: #f0f0f0;
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  transition: background 0.3s ease;
 }
 
+/* --- 2. Container Structure --- */
 .todo-container {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  width: 300px;
-  text-align: center;
+  background: var(--bg-container);
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px var(--shadow);
 }
 
-#todo-input {
-  width: 70%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-size: 1rem;
-}
-
-#add-btn {
-  padding: 10px 15px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-#todo-list {
-  list-style: none;
-  padding: 0;
-}
-
-#todo-list li {
-  background: #e0e0e0;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
+.header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 25px;
 }
 
-li button {
-  background: #e53935;
-  color: white;
-  border: none;
-  padding: 5px 8px;
-  border-radius: 3px;
-  cursor: pointer;
+h1 { font-size: 22px; font-weight: 600; }
+
+/* --- 3. Theme Switcher Style --- */
+.theme-switch {
+  position: relative; width: 42px; height: 22px;
 }
-.edit-input {
-  padding: 5px;
-  border: 1px solid #007bff;
-  border-radius: 4px;
-  margin-right: 5px;
+.theme-switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ddd; border-radius: 20px; transition: .4s;
+}
+.slider:before {
+  position: absolute; content: ""; height: 16px; width: 16px;
+  left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .4s;
+}
+input:checked + .slider { background-color: var(--primary); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* --- 4. Input & Filter Section --- */
+.input-section {
+  display: flex; gap: 10px; margin-bottom: 20px;
+}
+
+#todo-input {
+  flex: 1; padding: 12px 15px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--bg-body);
+  color: var(--text-main); outline: none; transition: 0.2s;
+  font-family: inherit;
+}
+#todo-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1); }
+
+#add-btn {
+  background: var(--primary); color: white; border: none;
+  padding: 0 22px; border-radius: 12px; cursor: pointer;
+  font-weight: 600; transition: 0.3s;
+}
+#add-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+.filter-container {
+  display: flex; gap: 8px; margin-bottom: 20px;
 }
 .filter-btn {
-  padding: 8px 16px;
-  border: 1px solid #ccc;
-  background-color: white;
-  cursor: pointer;
-  margin-right: 5px;
-  border-radius: 4px;
+  flex: 1; padding: 10px; border: none; background: transparent;
+  color: var(--text-sub); cursor: pointer; font-size: 13px; font-weight: 500;
+  border-radius: 10px; transition: 0.2s;
+}
+.filter-btn.active { background: var(--primary); color: white; }
+.filter-btn:not(.active):hover { background: var(--border); }
+
+/* --- 5. Todo List Items --- */
+#todo-list { list-style: none; }
+#todo-list li {
+  background: var(--task-bg);
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px var(--shadow);
+  transition: transform 0.2s ease;
 }
 
-/* ប៊ូតុងដែលត្រូវបានជ្រើសរើស (Active) */
-.filter-btn.active {
-  background-color: #007bff; /* ពណ៌ខៀវ */
-  color: white;
-  border-color: #0056b3;
+.todo-text { flex: 1; font-size: 15px; line-height: 1.4; }
+
+/* Styles for Checkbox */
+input[type="checkbox"] {
+  width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);
+}
+
+/* --- 6. Buttons & Edit Mode --- */
+li button {
+  padding: 6px 12px; border-radius: 8px; border: none;
+  cursor: pointer; font-size: 12px; font-weight: 500; transition: all 0.2s ease;
+}
+
+.edit-btn { background: #f1f2f6; color: #57606f; }
+.edit-btn:hover { background: #e2e4e9; }
+
+.delete-btn { background: #ffeae6; color: #eb4d4b; }
+.delete-btn:hover { background: #ffd3cc; transform: scale(1.05); }
+
+/* Styles specific to Edit Mode Input */
+.edit-input {
+  flex: 1; padding: 8px 12px; border: 1.5px solid var(--primary);
+  border-radius: 10px; background: var(--bg-body); color: var(--text-main);
+  outline: none; font-size: 14px; font-family: inherit;
+}
+
+/* Empty/No Task State */
+#todo-list li[style*="color: gray"] {
+  border: 1px dashed var(--border);
+  background: transparent;
+  box-shadow: none;
+  font-style: italic;
 }

@@ -1,20 +1,40 @@
-# To-Do List App
+Subject: README for Modern To-Do List App
 
-A simple and clean web-based To-Do List application built using **HTML**, **CSS**, and **JavaScript**.
-This project is designed for practicing fundamental DOM manipulation, event handling, and basic front-end architecture.
-The codebase is organized with a professional folder structure suitable for GitHub portfolios.
+# Modern To-Do List App
 
----
+A clean, modern, and responsive task management application built using HTML, CSS, JavaScript, and LocalStorage. Includes smooth animations, dark mode, filtering, and a professional UI/UX.
 
 ## Features
 
+### Core Features
+
 * Add new tasks
+* Edit existing tasks
 * Mark tasks as completed
 * Delete tasks
-* Responsive UI layout
-* Clean and minimal design
+* Persistent storage with LocalStorage
 
----
+### UI/UX Features
+
+* Modern clean interface
+* Fully responsive layout
+* Smooth GSAP animations
+* Light/Dark mode toggle
+* Improved spacing, shadows, borders, and typography
+
+### Task Management
+
+* Filter tasks (All / Active / Completed)
+* Task counter
+* Clear completed tasks
+
+## Tech Stack
+
+* HTML5
+* CSS3
+* JavaScript (ES6+)
+* GSAP (for animation)
+* LocalStorage
 
 ## Project Structure
 
@@ -29,47 +49,36 @@ To-Do-List/
 │── LICENSE (optional)
 ```
 
----
+## How It Works
 
-## How to Run the Project
+1. **Add Task:** Type a task then press Add or Enter.
+2. **Edit Task:** Click Edit, update task, click Save.
+3. **Complete Task:** Toggle checkbox to mark done.
+4. **Filter Tasks:** Choose All, Active, or Completed.
+5. **Dark Mode:** Toggle theme switch (stored in LocalStorage).
 
-1. Download or clone the repository:
+## Installation & Usage
+
+1. Clone repository:
 
    ```
    git clone https://github.com/your-username/To-Do-List.git
    ```
-2. Open the `public/index.html` file in any web browser.
-3. No server or backend is required. The app runs entirely in the browser.
+2. Open project folder:
 
----
+   ```
+   cd To-Do-List/public
+   ```
+3. Open `index.html` in any browser.
 
-## Planned Improvements (Roadmap)
+## Roadmap (Future Improvements)
 
-* LocalStorage support
-* Edit task functionality
-* Filters (All, Active, Completed)
-* Light/Dark mode toggle
-* Better UI/UX layout
-* Animations (CSS or GSAP)
-* Drag-and-drop task sorting
-
----
-
-## Technologies Used
-
-* HTML
-* CSS
-* JavaScript (Vanilla JS)
-
----
-
-## Author
-
-Saktra (Chea Saktra)
-Frontend Developer
-
----
+* Drag & drop task sorting
+* Auto-detect system theme
+* Accessibility improvements
+* Task categories/tags
+* Online sync with backend
 
 ## License
 
-This project is open-source and available under the MIT License.
+MIT License (or choose your preferred license).
