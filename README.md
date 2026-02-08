@@ -1,5 +1,3 @@
-Subject: README for Modern To-Do List App
-
 # Modern To-Do List App
 
 A clean, modern, and responsive task management application built using HTML, CSS, JavaScript, and LocalStorage. Includes smooth animations, dark mode, filtering, and a professional UI/UX.
